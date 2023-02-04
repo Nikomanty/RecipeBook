@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/res/recipe_book_strings.dart';
-import 'package:recipe_book/views/recipe_book.dart';
+import 'package:recipe_book/view/recipe_book.dart';
 
 void main() {
   runApp(MaterialApp(

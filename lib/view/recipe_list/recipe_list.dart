@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/model/recipe.dart';
+import 'package:recipe_book/view/recipe_list/recipe_card.dart';
 
 class RecipeList extends StatelessWidget {
   final List<Recipe> recipes;
@@ -17,17 +18,8 @@ class RecipeList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.all(5.0),
-          //TODO: Add real card widget for recipes
-          child: ListTile(
-            title: Text(
-              "Recipe name: ${recipes[index].recipeName}",
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            subtitle: Text(
-              "Duration: ${recipes[index].duration}",
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-            tileColor: Colors.grey,
+          child: RecipeCard(
+            recipe: recipes[index],
           ),
         );
       },
