@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/res/recipe_book_strings.dart';
+import 'package:recipe_book/view/recipe_details/recipe_details.dart';
 import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
+import 'package:recipe_book/widgets/images/rounded_image.dart';
 import 'package:recipe_book/widgets/labels/icon_label.dart';
 import 'package:recipe_book/widgets/labels/title_label.dart';
 
@@ -14,7 +17,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => debugPrint("Open recipe"),
+      onTap: () => _openSelectedRecipe(context),
       child: Container(
         height: 180,
         margin: const EdgeInsets.all(5),
@@ -49,9 +52,10 @@ class RecipeCard extends StatelessWidget {
                     TitleLabel(title: recipe.recipeName, maxRows: 1),
                     const Padding(padding: EdgeInsets.symmetric(vertical: 3.0)),
                     IconLabel(
-                        icon: Icons.timer_outlined,
-                        label:
-                            "${recipe.duration} ${RecipeBookStrings.minutesString}"),
+                      icon: Icons.timer_outlined,
+                      label:
+                          "${recipe.duration} ${RecipeBookStrings.minutesString}",
+                    ),
                   ],
                 ),
               ),
@@ -62,8 +66,20 @@ class RecipeCard extends StatelessWidget {
             ],
           ),
         ),
-        RecipeCardImage(recipeThumpNailImagePath: recipe.image),
+        Expanded(child: RoundedImage(imagePath: recipe.image)),
       ],
+    );
+  }
+
+  _openSelectedRecipe(BuildContext context) {
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: RecipeDetails(
+          recipe: recipe,
+        ),
+      ),
     );
   }
 }
