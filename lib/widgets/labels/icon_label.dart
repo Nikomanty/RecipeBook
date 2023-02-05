@@ -3,17 +3,19 @@ import 'package:flutter/material.dart';
 class IconLabel extends StatelessWidget {
   final IconData icon;
   final String label;
+  final MainAxisAlignment? mainAxisAlignment;
 
   const IconLabel({
     Key? key,
     required this.icon,
     required this.label,
+    this.mainAxisAlignment,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
+      mainAxisAlignment: mainAxisAlignment ?? MainAxisAlignment.start,
       children: [
         Icon(
           icon,
