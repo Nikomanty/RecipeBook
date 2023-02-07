@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:recipe_book/widgets/containers/labeled_outline_box.dart';
 
 class RecipeIntroductions extends StatelessWidget {
-  final List<String> introductions;
+  final List<dynamic> introductions;
 
   const RecipeIntroductions({
     Key? key,
