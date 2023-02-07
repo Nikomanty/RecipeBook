@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/model/recipe.dart';
 
 class RecipeIngredientList extends StatelessWidget {
-  final Map<String, String> ingredients;
+  final Map<String, dynamic> ingredients;
 
   const RecipeIngredientList({
     Key? key,

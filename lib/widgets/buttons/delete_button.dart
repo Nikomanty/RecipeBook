@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class DeleteButton extends StatelessWidget {
   final String? itemToDeleteName;
   final double? iconSize;
+  final Function() deleteItem;
 
   const DeleteButton({
     Key? key,
     this.itemToDeleteName,
     this.iconSize,
+    required this.deleteItem,
   }) : super(key: key);
 
   @override
@@ -33,7 +35,7 @@ class DeleteButton extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
-            debugPrint("Delete item");
+            deleteItem();
             Navigator.of(context).pop();
           },
           child: const Text("Confirm"),

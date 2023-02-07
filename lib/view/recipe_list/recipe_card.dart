@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/res/recipe_book_strings.dart';
 import 'package:recipe_book/view/recipe_details/recipe_details.dart';
-import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
 import 'package:recipe_book/widgets/labels/icon_label.dart';
@@ -32,12 +33,12 @@ class RecipeCard extends StatelessWidget {
             ),
           ],
         ),
-        child: _cardContent(),
+        child: _cardContent(context),
       ),
     );
   }
 
-  Widget _cardContent() {
+  Widget _cardContent(BuildContext context) {
     return Column(
       children: [
         Padding(
@@ -62,6 +63,9 @@ class RecipeCard extends StatelessWidget {
               DeleteButton(
                 itemToDeleteName: recipe.recipeName,
                 iconSize: 35,
+                deleteItem: () {
+                    context.read<RecipeCubit>().deleteRecipe(recipe.id!);
+                },
               ),
             ],
           ),
