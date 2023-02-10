@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/model/recipe.dart';
-import 'package:recipe_book/res/recipe_book_strings.dart';
+import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/view/recipe_details/recipe_ingredient_list.dart';
 import 'package:recipe_book/view/recipe_details/recipe_introductions.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
@@ -30,7 +30,7 @@ class RecipeDetails extends StatelessWidget {
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: [
-            RoundedImage(imagePath: recipe.image, height: 250,),
+            _recipeImage(),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -55,6 +55,21 @@ class RecipeDetails extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _recipeImage() {
+    if (recipe.image.isNotEmpty) {
+      return RoundedImage(
+        imagePath: recipe.image,
+        height: 300,
+        aspectRatio: 4 / 3,
+      );
+    } else {
+      return const SizedBox(
+        height: 300,
+        child: Center(child: Text(RecipeBookStrings.noImageFound, textAlign: TextAlign.center,)),
+      );
+    }
   }
 
   Widget _detailsDivider() {

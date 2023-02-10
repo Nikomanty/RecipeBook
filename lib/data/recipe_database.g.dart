@@ -111,9 +111,8 @@ class _$RecipeDao extends RecipeDao {
                   'id': item.id,
                   'recipeName': item.recipeName,
                   'duration': item.duration,
-                  'ingredients': _ingredientConverter.encode(item.ingredients),
-                  'introductions':
-                      _introductionsConverter.encode(item.introductions),
+                  'ingredients': _listConverter.encode(item.ingredients),
+                  'introductions': _listConverter.encode(item.introductions),
                   'image': item.image
                 });
 
@@ -132,10 +131,9 @@ class _$RecipeDao extends RecipeDao {
             id: row['id'] as int?,
             recipeName: row['recipeName'] as String,
             duration: row['duration'] as int,
-            ingredients:
-                _ingredientConverter.decode(row['ingredients'] as String),
+            ingredients: _listConverter.decode(row['ingredients'] as String),
             introductions:
-                _introductionsConverter.decode(row['introductions'] as String),
+                _listConverter.decode(row['introductions'] as String),
             image: row['image'] as String));
   }
 
@@ -146,10 +144,9 @@ class _$RecipeDao extends RecipeDao {
             id: row['id'] as int?,
             recipeName: row['recipeName'] as String,
             duration: row['duration'] as int,
-            ingredients:
-                _ingredientConverter.decode(row['ingredients'] as String),
+            ingredients: _listConverter.decode(row['ingredients'] as String),
             introductions:
-                _introductionsConverter.decode(row['introductions'] as String),
+                _listConverter.decode(row['introductions'] as String),
             image: row['image'] as String),
         arguments: [id]);
   }
@@ -167,5 +164,4 @@ class _$RecipeDao extends RecipeDao {
 }
 
 // ignore_for_file: unused_element
-final _ingredientConverter = IngredientConverter();
-final _introductionsConverter = IntroductionsConverter();
+final _listConverter = ListConverter();
