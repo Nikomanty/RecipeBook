@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:floor/floor.dart';
 
-class IntroductionsConverter extends TypeConverter<List<dynamic>, String>{
+class ListConverter extends TypeConverter<List<dynamic>, String>{
   @override
   List<dynamic> decode(String databaseValue) {
     return jsonDecode(databaseValue);
@@ -11,5 +11,4 @@ class IntroductionsConverter extends TypeConverter<List<dynamic>, String>{
   String encode(List<dynamic> value) {
     return jsonEncode(value);
   }
-
 }

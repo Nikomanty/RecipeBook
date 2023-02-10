@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
-import 'package:recipe_book/res/recipe_book_strings.dart';
+import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/view/recipe_details/recipe_details.dart';
+import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
 import 'package:recipe_book/widgets/labels/icon_label.dart';
@@ -20,8 +21,8 @@ class RecipeCard extends StatelessWidget {
     return InkWell(
       onTap: () => _openSelectedRecipe(context),
       child: Container(
-        height: 180,
         margin: const EdgeInsets.all(5),
+        height: 80,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(6),
@@ -39,38 +40,47 @@ class RecipeCard extends StatelessWidget {
   }
 
   Widget _cardContent(BuildContext context) {
-    return Column(
+    return Row(
       children: [
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Flexible(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    TitleLabel(title: recipe.recipeName, maxRows: 1),
-                    const Padding(padding: EdgeInsets.symmetric(vertical: 3.0)),
-                    IconLabel(
-                      icon: Icons.timer_outlined,
-                      label:
-                          "${recipe.duration} ${RecipeBookStrings.minutesString}",
-                    ),
-                  ],
+        Expanded(
+          child: RecipeCardImage(imagePath: recipe.image),
+        ),
+        Expanded(
+          flex: 3,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TitleLabel(title: recipe.recipeName, maxRows: 1),
+                      if (recipe.duration > 0)
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: IconLabel(
+                            icon: Icons.timer_outlined,
+                            label:
+                                "${recipe.duration} ${RecipeBookStrings.minutesString}",
+                          ),
+                        ),
+                    ],
+                  ),
                 ),
-              ),
-              DeleteButton(
-                itemToDeleteName: recipe.recipeName,
-                iconSize: 35,
-                deleteItem: () {
+                DeleteButton(
+                  itemToDeleteName: recipe.recipeName,
+                  iconSize: 35,
+                  deleteItem: () {
                     context.read<RecipeCubit>().deleteRecipe(recipe.id!);
-                },
-              ),
-            ],
+                  },
+                ),
+              ],
+            ),
           ),
         ),
-        Expanded(child: RoundedImage(imagePath: recipe.image)),
       ],
     );
   }

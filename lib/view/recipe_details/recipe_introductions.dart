@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/widgets/containers/labeled_outline_box.dart';
 
 class RecipeIntroductions extends StatelessWidget {
@@ -33,21 +34,10 @@ class RecipeIntroductions extends StatelessWidget {
         ),
       );
     } else {
-      return Container(
-        decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(
-            color: Colors.black,
-            width: 1,
-          ),
-          borderRadius: BorderRadius.circular(15),
-        ),
-        child: const Padding(
-          padding: EdgeInsets.all(10.0),
-          child: Text(
-            "No Intros found",
-            textAlign: TextAlign.center,
-          ),
+      return const Center(
+        child: Text(
+          RecipeBookStrings.noIntroductionsFound,
+          textAlign: TextAlign.center,
         ),
       );
     }
