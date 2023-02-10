@@ -3,12 +3,12 @@ import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/widgets/containers/labeled_outline_box.dart';
 
 class RecipeIntroductions extends StatelessWidget {
-  final List<dynamic> introductions;
+  final List<String> introductions;
 
   const RecipeIntroductions({
-    Key? key,
+    super.key,
     required this.introductions,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

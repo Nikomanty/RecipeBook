@@ -9,10 +9,10 @@ class IngredientInputField extends StatefulWidget {
   final String valueKey;
 
   const IngredientInputField({
-    Key? key,
+    super.key,
     required this.contentToUpdate,
     required this.valueKey,
-  }) : super(key: key);
+  });
 
   @override
   State<IngredientInputField> createState() => _IngredientInputFieldState();

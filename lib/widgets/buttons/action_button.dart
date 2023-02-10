@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ActionButton extends StatelessWidget {
-  final Function() action;
+  final VoidCallback action;
   final String title;
 
   const ActionButton({
-    Key? key,
+    super.key,
     required this.action,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

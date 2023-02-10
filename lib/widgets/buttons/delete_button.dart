@@ -3,23 +3,23 @@ import 'package:flutter/material.dart';
 class DeleteButton extends StatelessWidget {
   final String? itemToDeleteName;
   final double? iconSize;
-  final Function() deleteItem;
+  final VoidCallback deleteItem;
 
   const DeleteButton({
-    Key? key,
+    super.key,
     this.itemToDeleteName,
     this.iconSize,
     required this.deleteItem,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       icon: Icon(Icons.delete, size: iconSize ?? 25),
       onPressed: () {
-        showDialog(
+        showDialog<AlertDialog>(
           context: context,
-          builder: (BuildContext context) {
+          builder: (context) {
             return _dialog(context);
           },
         );
@@ -27,7 +27,7 @@ class DeleteButton extends StatelessWidget {
     );
   }
 
-  _dialog(BuildContext context) {
+  AlertDialog _dialog(BuildContext context) {
     return AlertDialog(
       title: Text(
         "Delete $itemToDeleteName?",

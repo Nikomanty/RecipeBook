@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
 
 class RecipeCardImage extends StatelessWidget {
   final String? imagePath;
 
-  const RecipeCardImage({Key? key, required this.imagePath}) : super(key: key);
+  const RecipeCardImage({super.key, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/model/recipe.dart';
 
 class RecipeIngredientList extends StatelessWidget {
-  final List<dynamic> ingredients;
+  final List<Ingredient> ingredients;
 
   const RecipeIngredientList({
-    Key? key,
+    super.key,
     required this.ingredients,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +22,14 @@ class RecipeIngredientList extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    ingredient['amount'],
+                    ingredient.amount,
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 Expanded(
                   flex: 5,
-                  child: Text.rich(TextSpan(text: ingredient['ingredient'])),
+                  child: Text.rich(TextSpan(text: ingredient.ingredient)),
                 ),
               ],
             ),
@@ -38,7 +39,7 @@ class RecipeIngredientList extends StatelessWidget {
     } else {
       return const Center(
         child: Text(
-          "No ingredients found",
+          RecipeBookStrings.noIngredientsFound,
           textAlign: TextAlign.center,
         ),
       );
