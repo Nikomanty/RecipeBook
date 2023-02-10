@@ -7,7 +7,8 @@ class RecipeBookStrings {
       "You don't have any recipes yet. \nClick plus-button to make one.";
 
   //Recipe details
-  static const String noImageFound = "No image found \nfor this recipe";
+  static const String noImageFound = "There is no image \nin this recipe";
+  static const String noIngredientsFound = "No ingredients, click edit \nto add some";
   static const String noIntroductionsFound =
       "This recipe doesn't have introductions. \nIf you want to add introductions, \nclick edit and add some";
 

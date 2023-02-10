@@ -6,11 +6,11 @@ class LabeledOutlineBox extends StatelessWidget {
   final Widget child;
 
   const LabeledOutlineBox({
-    Key? key,
+    super.key,
     required this.label,
     required this.child,
     this.labelSize,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

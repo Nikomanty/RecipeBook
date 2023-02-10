@@ -6,11 +6,11 @@ class IconLabel extends StatelessWidget {
   final MainAxisAlignment? mainAxisAlignment;
 
   const IconLabel({
-    Key? key,
+    super.key,
     required this.icon,
     required this.label,
     this.mainAxisAlignment,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

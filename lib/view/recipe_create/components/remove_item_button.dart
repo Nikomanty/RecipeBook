@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class RemoveItemButton extends StatelessWidget {
-  final Function() removeItem;
+  final VoidCallback removeItem;
 
-  const RemoveItemButton({Key? key, required this.removeItem}) : super(key: key);
+  const RemoveItemButton({super.key, required this.removeItem});
 
   @override
   Widget build(BuildContext context) {

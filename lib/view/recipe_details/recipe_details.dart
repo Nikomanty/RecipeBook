@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/constants/recipe_book_strings.dart';
+import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/view/recipe_details/recipe_ingredient_list.dart';
 import 'package:recipe_book/view/recipe_details/recipe_introductions.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
@@ -11,9 +11,9 @@ class RecipeDetails extends StatelessWidget {
   final Recipe recipe;
 
   const RecipeDetails({
-    Key? key,
+    super.key,
     required this.recipe,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -4,13 +4,13 @@ import 'package:recipe_book/widgets/images/rounded_image.dart';
 
 class RecipeImagePicker extends StatelessWidget {
   final String imagePath;
-  final Function() updateImage;
+  final VoidCallback updateImage;
 
   const RecipeImagePicker({
-    Key? key,
+    super.key,
     required this.imagePath,
     required this.updateImage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

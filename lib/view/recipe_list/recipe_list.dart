@@ -6,9 +6,9 @@ class RecipeList extends StatelessWidget {
   final List<Recipe> recipes;
 
   const RecipeList({
-    Key? key,
+    super.key,
     required this.recipes,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

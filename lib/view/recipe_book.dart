@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/constants/recipe_book_strings.dart';
+import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
+import 'package:recipe_book/utils/navigation_utils.dart';
 import 'package:recipe_book/view/recipe_create/recipe_form.dart';
 import 'package:recipe_book/view/recipe_list/recipe_list.dart';
-import 'package:recipe_book/widgets/buttons/action_button.dart';
 import 'package:recipe_book/widgets/errors/centered_error_text.dart';
 
 class RecipeBook extends StatelessWidget {
-  const RecipeBook({Key? key}) : super(key: key);
+  const RecipeBook({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +41,7 @@ class RecipeBook extends StatelessWidget {
                   child: Text(
                     RecipeBookStrings.cardListNoRecipes,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 22
-                    ),
+                    style: TextStyle(fontSize: 22),
                   ),
                 ),
               );
@@ -58,22 +55,15 @@ class RecipeBook extends StatelessWidget {
           height: 70,
           width: 70,
           child: FloatingActionButton(
-            onPressed: () => _openSelectedRecipe(context),
+            onPressed: () => NavigationUtils.openSelectedRecipe(
+              context,
+              const RecipeForm(),
+            ),
             child: const Icon(Icons.add),
           ),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
-  }
-
-  _openSelectedRecipe(BuildContext context) {
-    Navigator.push(
-      context,
-      PageTransition(
-        type: PageTransitionType.rightToLeft,
-        child: const RecipeForm(),
-      ),
     );
   }
 }

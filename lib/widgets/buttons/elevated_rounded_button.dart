@@ -10,7 +10,7 @@ class ElevatedRoundedButton extends StatelessWidget {
   final Function onClick;
 
   const ElevatedRoundedButton({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     required this.radius,
@@ -18,7 +18,7 @@ class ElevatedRoundedButton extends StatelessWidget {
     required this.color,
     required this.content,
     required this.onClick,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

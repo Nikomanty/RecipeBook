@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:recipe_book/widgets/buttons/elevated_rounded_button.dart';
 
 class AddItemButton extends StatelessWidget {
-  final Function() addItem;
+  final VoidCallback addItem;
   final String title;
 
   const AddItemButton({
-    Key? key,
+    super.key,
     required this.addItem,
     required this.title,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

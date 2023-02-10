@@ -8,10 +8,10 @@ class IntroductionInputField extends StatefulWidget {
   final String valueKey;
 
   const IntroductionInputField({
-    Key? key,
+    super.key,
     required this.contentToUpdate,
     required this.valueKey,
-  }) : super(key: key);
+  });
 
   @override
   State<IntroductionInputField> createState() => _IntroductionInputFieldState();

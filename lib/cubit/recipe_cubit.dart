@@ -13,7 +13,7 @@ class RecipeCubit extends Cubit<RecipeState> {
 
   Future<void> updateData() async {
     emit(const RecipeState(status: RecipeStatus.update));
-    getData();
+    await getData();
   }
 
   Future<void> getData() async {
@@ -27,8 +27,8 @@ class RecipeCubit extends Cubit<RecipeState> {
 
   Future<void> createRecipe(Recipe recipe) async {
     try {
-      _recipeRepository.createData(recipe);
-      updateData();
+      await _recipeRepository.createData(recipe);
+      await updateData();
     } on Exception catch (exception) {
       emit(RecipeState(status: RecipeStatus.error, exception: exception));
     }
@@ -36,8 +36,8 @@ class RecipeCubit extends Cubit<RecipeState> {
 
   Future<void> deleteRecipe(int id) async {
     try {
-      _recipeRepository.deleteData(id);
-      updateData();
+      await _recipeRepository.deleteData(id);
+      await updateData();
     } on Exception catch (exception) {
       emit(RecipeState(status: RecipeStatus.error, exception: exception));
     }

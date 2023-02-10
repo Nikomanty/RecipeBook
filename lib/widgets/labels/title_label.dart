@@ -5,10 +5,10 @@ class TitleLabel extends StatelessWidget {
   final int maxRows;
 
   const TitleLabel({
-    Key? key,
+    super.key,
     required this.title,
     required this.maxRows,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

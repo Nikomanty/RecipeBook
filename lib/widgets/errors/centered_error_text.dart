@@ -1,14 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 
 class CenteredErrorText extends StatelessWidget {
   final String? errorMessage;
 
   const CenteredErrorText({
-    Key? key,
+    super.key,
     this.errorMessage,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

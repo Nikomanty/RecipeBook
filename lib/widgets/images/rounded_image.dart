@@ -7,11 +7,11 @@ class RoundedImage extends StatelessWidget {
   final double aspectRatio;
 
   const RoundedImage({
-    Key? key,
+    super.key,
     required this.imagePath,
     this.height,
     required this.aspectRatio,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

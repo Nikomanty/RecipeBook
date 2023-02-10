@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
-import 'package:recipe_book/constants/recipe_book_strings.dart';
+import 'package:recipe_book/utils/navigation_utils.dart';
 import 'package:recipe_book/view/recipe_details/recipe_details.dart';
 import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
@@ -13,12 +13,17 @@ import 'package:recipe_book/widgets/labels/title_label.dart';
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
 
-  const RecipeCard({Key? key, required this.recipe}) : super(key: key);
+  const RecipeCard({super.key, required this.recipe});
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => _openSelectedRecipe(context),
+      onTap: () => NavigationUtils.openSelectedRecipe(
+        context,
+        RecipeDetails(
+          recipe: recipe,
+        ),
+      ),
       child: Container(
         margin: const EdgeInsets.all(5),
         height: 80,
@@ -81,18 +86,6 @@ class RecipeCard extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-
-  _openSelectedRecipe(BuildContext context) {
-    Navigator.push(
-      context,
-      PageTransition(
-        type: PageTransitionType.rightToLeft,
-        child: RecipeDetails(
-          recipe: recipe,
-        ),
-      ),
     );
   }
 }
