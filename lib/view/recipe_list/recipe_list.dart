@@ -14,7 +14,7 @@ class RecipeList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: recipes.length,
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.only(bottom: 100, top: 5, left: 5, right: 5),
       itemBuilder: (context, index) {
         return Padding(
           padding: const EdgeInsets.all(5.0),

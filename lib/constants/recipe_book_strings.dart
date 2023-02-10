@@ -2,6 +2,10 @@
 class RecipeBookStrings {
   static const String appTitle = "Recipe Book";
 
+  //Recipe list
+  static const String cardListNoRecipes =
+      "You don't have any recipes yet. \nClick plus-button to make one.";
+
   //Recipe details
   static const String noImageFound = "No image found \nfor this recipe";
   static const String noIntroductionsFound =

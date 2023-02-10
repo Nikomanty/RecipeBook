@@ -7,7 +7,6 @@ import 'package:recipe_book/constants/recipe_book_strings.dart';
 import 'package:recipe_book/view/recipe_details/recipe_details.dart';
 import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
-import 'package:recipe_book/widgets/images/rounded_image.dart';
 import 'package:recipe_book/widgets/labels/icon_label.dart';
 import 'package:recipe_book/widgets/labels/title_label.dart';
 
