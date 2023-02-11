@@ -5,9 +5,7 @@ class IntroductionConverter extends TypeConverter<List<String>, String> {
   @override
   List<String> decode(String databaseValue) {
     final List<dynamic> jsonData = jsonDecode(databaseValue) as List<dynamic>;
-    final List<String> convertedList =
-        jsonData.map((introduction) => introduction as String).toList();
-    return convertedList;
+    return jsonData.map((introduction) => introduction as String).toList();
   }
 
   @override

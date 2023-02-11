@@ -18,7 +18,7 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => NavigationUtils.openSelectedRecipe(
+      onTap: () => NavigationUtils.navigateToView(
         context,
         RecipeDetails(
           recipe: recipe,

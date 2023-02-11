@@ -18,41 +18,28 @@ class RecipeDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () => debugPrint("Edit recipe"),
-            icon: const Icon(Icons.edit),
-          ),
-        ],
-      ),
-      body: Padding(
+      appBar: AppBar(),
+      body: ListView(
         padding: const EdgeInsets.all(10.0),
-        child: ListView(
-          children: [
-            _recipeImage(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                TitleLabel(
-                  title: recipe.recipeName,
-                  maxRows: 2,
-                ),
-                const Padding(padding: EdgeInsets.symmetric(vertical: 3)),
-                IconLabel(
-                  icon: Icons.timer_outlined,
-                  label:
-                      "${recipe.duration} ${RecipeBookStrings.minutesString}",
-                  mainAxisAlignment: MainAxisAlignment.center,
-                ),
-              ],
-            ),
-            _detailsDivider(),
-            RecipeIngredientList(ingredients: recipe.ingredients),
-            _detailsDivider(),
-            RecipeIntroductions(introductions: recipe.introductions),
-          ],
-        ),
+        children: [
+          _recipeImage(),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          TitleLabel(
+            title: recipe.recipeName,
+            maxRows: 2,
+            centered: true,
+          ),
+          const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+          IconLabel(
+            icon: Icons.timer_outlined,
+            label: "${recipe.duration} ${RecipeBookStrings.minutesString}",
+            mainAxisAlignment: MainAxisAlignment.center,
+          ),
+          _detailsDivider(),
+          RecipeIngredientList(ingredients: recipe.ingredients),
+          _detailsDivider(),
+          RecipeIntroductions(introductions: recipe.introductions),
+        ],
       ),
     );
   }
@@ -65,9 +52,9 @@ class RecipeDetails extends StatelessWidget {
         aspectRatio: 4 / 3,
       );
     } else {
-      return const SizedBox(
-        height: 300,
-        child: Center(child: Text(RecipeBookStrings.noImageFound, textAlign: TextAlign.center,)),
+      return const Icon(
+        Icons.menu_book_outlined,
+        size: 200,
       );
     }
   }
