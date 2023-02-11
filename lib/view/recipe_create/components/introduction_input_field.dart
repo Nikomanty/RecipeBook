@@ -4,13 +4,11 @@ import 'package:recipe_book/view/recipe_create/components/add_item_button.dart';
 import 'package:recipe_book/view/recipe_create/components/remove_item_button.dart';
 
 class IntroductionInputField extends StatefulWidget {
-  final List<String> contentToUpdate;
-  final String valueKey;
+  final List<String> introductions;
 
   const IntroductionInputField({
     super.key,
-    required this.contentToUpdate,
-    required this.valueKey,
+    required this.introductions,
   });
 
   @override
@@ -21,13 +19,13 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
   @override
   Widget build(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _introductionInputsList(),
         AddItemButton(
           addItem: () {
             setState(() {
-              widget.contentToUpdate.add("");
+              widget.introductions.add("");
             });
           },
           title: RecipeBookStrings.addIntroductionStepButtonText,
@@ -38,8 +36,8 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
 
   Column _introductionInputsList() {
     return Column(
-      children: widget.contentToUpdate.map((item) {
-        int index = widget.contentToUpdate.indexOf(item);
+      children: widget.introductions.map((item) {
+        int index = widget.introductions.indexOf(item);
         return Row(
           children: [
             _introductionInputField(index),
@@ -47,7 +45,7 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
               padding: const EdgeInsets.only(left: 10.0),
               child: RemoveItemButton(removeItem: () {
                 setState(() {
-                  widget.contentToUpdate.removeAt(index);
+                  widget.introductions.removeAt(index);
                 });
               }),
             ),
@@ -60,9 +58,8 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
   Widget _introductionInputField(int index) {
     return Expanded(
       child: TextFormField(
-        key: ValueKey(widget.valueKey),
         onChanged: (value) {
-          widget.contentToUpdate[index] = value;
+          widget.introductions[index] = value;
         },
         keyboardType: TextInputType.multiline,
         maxLines: null,

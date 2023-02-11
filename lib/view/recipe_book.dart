@@ -49,18 +49,15 @@ class RecipeBook extends StatelessWidget {
           }
         },
       ),
-      floatingActionButton: Align(
-        alignment: Alignment.bottomCenter,
-        child: SizedBox(
-          height: 70,
-          width: 70,
-          child: FloatingActionButton(
-            onPressed: () => NavigationUtils.openSelectedRecipe(
-              context,
-              const RecipeForm(),
-            ),
-            child: const Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        height: 70,
+        width: 70,
+        child: FloatingActionButton(
+          onPressed: () => NavigationUtils.navigateToView(
+            context,
+            const RecipeForm(),
           ),
+          child: const Icon(Icons.add),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

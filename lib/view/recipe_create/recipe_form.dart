@@ -44,16 +44,13 @@ class _RecipeFormState extends State<RecipeForm> {
           label: RecipeBookStrings.recipeImageString,
           child: InkWell(
             child: _recipePicker(),
-            onTap: () {
-              _pickImage(ImageSource.gallery);
-            },
+            onTap: () => _pickImage(),
           ),
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
         TextFormField(
           validator: (value) {
-            debugPrint(value);
-            if (value != null && value.isEmpty) {
+            if (value == null || value.isEmpty) {
               return RecipeBookStrings.mustAddRecipeName;
             }
             return null;
@@ -76,13 +73,10 @@ class _RecipeFormState extends State<RecipeForm> {
         ),
         const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
         IngredientInputField(
-          contentToUpdate: _ingredients,
-          valueKey: "ingredients",
+          ingredients: _ingredients,
         ),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
         IntroductionInputField(
-          contentToUpdate: _introductions,
-          valueKey: "introductions",
+          introductions: _introductions,
         ),
         _createCreateRecipeButton(context),
       ],
@@ -124,9 +118,11 @@ class _RecipeFormState extends State<RecipeForm> {
     );
   }
 
-  Future _pickImage(ImageSource source) async {
+  Future _pickImage() async {
     try {
-      final PickedFile? image = await ImagePicker().getImage(source: source);
+      final PickedFile? image = await ImagePicker().getImage(
+        source: ImageSource.gallery,
+      );
       if (image != null) {
         setState(() {
           _imagePath = image.path;
@@ -138,22 +134,13 @@ class _RecipeFormState extends State<RecipeForm> {
   }
 
   void _trySubmit() {
-    debugPrint(_recipeName);
-    debugPrint(_duration.toString());
     final isValid = _formKey.currentState?.validate();
     if (isValid! && isValid) {
-      _formKey.currentState?.save();
-      _submitRecipeForm(
-        _recipeName,
-        _duration,
-        _ingredients,
-        _introductions,
-      );
+      _submitRecipeForm();
     }
   }
 
-  void _submitRecipeForm(String recipeName, int duration,
-      List<Ingredient> ingredients, List<String> introductions) {
+  void _submitRecipeForm() {
     context.read<RecipeCubit>().createRecipe(Recipe(
           recipeName: _recipeName,
           duration: _duration,
