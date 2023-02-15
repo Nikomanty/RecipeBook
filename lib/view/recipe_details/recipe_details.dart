@@ -22,12 +22,16 @@ class RecipeDetails extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10.0),
         children: [
-          _recipeImage(),
+          RoundedImage(
+            imagePath: recipe.image,
+            height: 300,
+            placeholderImage: Icons.menu_book,
+          ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
           TitleLabel(
             title: recipe.recipeName,
             maxRows: 2,
-            centered: true,
+            textAlign: TextAlign.center,
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
           IconLabel(
@@ -42,21 +46,6 @@ class RecipeDetails extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Widget _recipeImage() {
-    if (recipe.image.isNotEmpty) {
-      return RoundedImage(
-        imagePath: recipe.image,
-        height: 300,
-        aspectRatio: 4 / 3,
-      );
-    } else {
-      return const Icon(
-        Icons.menu_book_outlined,
-        size: 200,
-      );
-    }
   }
 
   Widget _detailsDivider() {

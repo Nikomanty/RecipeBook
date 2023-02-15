@@ -18,7 +18,6 @@ class RecipeIngredientList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(5.0),
             child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Expanded(
                   child: Text(
@@ -29,7 +28,7 @@ class RecipeIngredientList extends StatelessWidget {
                 const Padding(padding: EdgeInsets.symmetric(horizontal: 10)),
                 Expanded(
                   flex: 5,
-                  child: Text.rich(TextSpan(text: ingredient.ingredient)),
+                  child: Text(ingredient.ingredient),
                 ),
               ],
             ),

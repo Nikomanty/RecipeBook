@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 class TitleLabel extends StatelessWidget {
   final String title;
   final int maxRows;
-  final bool centered;
+  final TextAlign? textAlign;
 
   const TitleLabel({
     super.key,
     required this.title,
-    required this.maxRows,
-    this.centered = false,
+    this.maxRows = 1,
+    this.textAlign,
   });
 
   @override
   Widget build(BuildContext context) {
     return Text(
       title,
-      textAlign: centered ? TextAlign.center : TextAlign.start,
+      textAlign: textAlign,
       overflow: TextOverflow.ellipsis,
       maxLines: maxRows,
       style: const TextStyle(

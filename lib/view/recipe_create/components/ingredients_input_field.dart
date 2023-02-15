@@ -26,8 +26,7 @@ class _IngredientInputFieldState extends State<IngredientInputField> {
         AddItemButton(
           addItem: () {
             setState(() {
-              widget.ingredients
-                  .add(Ingredient(ingredient: "", amount: ""));
+              widget.ingredients.add(Ingredient(ingredient: "", amount: ""));
             });
           },
           title: RecipeBookStrings.addIngredientButtonText,
@@ -61,6 +60,7 @@ class _IngredientInputFieldState extends State<IngredientInputField> {
     return Row(
       children: [
         Expanded(
+          flex: 2,
           child: TextFormField(
             onChanged: (value) {
               widget.ingredients[index].ingredient = value;
@@ -75,8 +75,8 @@ class _IngredientInputFieldState extends State<IngredientInputField> {
             onChanged: (value) {
               widget.ingredients[index].amount = value;
             },
-            decoration:
-                const InputDecoration(hintText: RecipeBookStrings.amountString),
+            decoration: const InputDecoration(
+                hintText: RecipeBookStrings.addAmountHint),
           ),
         ),
       ],

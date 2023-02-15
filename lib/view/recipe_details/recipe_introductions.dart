@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:recipe_book/constants/recipe_book_strings.dart';
-import 'package:recipe_book/widgets/containers/labeled_outline_box.dart';
+import 'package:recipe_book/widgets/containers/titled_outline_box.dart';
 
 class RecipeIntroductions extends StatelessWidget {
   final List<String> introductions;
@@ -13,9 +13,9 @@ class RecipeIntroductions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (introductions.isNotEmpty) {
-      return LabeledOutlineBox(
+      return TitledOutlineBox(
         label: "Introductions",
-        child: Column(
+        content: Column(
           children: introductions.map((introduction) {
             return Padding(
               padding: const EdgeInsets.all(5.0),
@@ -26,7 +26,7 @@ class RecipeIntroductions extends StatelessWidget {
                     "${introductions.indexOf(introduction) + 1}. ",
                     style: const TextStyle(fontWeight: FontWeight.bold),
                   ),
-                  Expanded(child: Text.rich(TextSpan(text: introduction))),
+                  Flexible(child: Text(introduction)),
                 ],
               ),
             );
