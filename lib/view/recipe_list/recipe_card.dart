@@ -5,8 +5,8 @@ import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/utils/navigation_utils.dart';
 import 'package:recipe_book/view/recipe_details/recipe_details.dart';
-import 'package:recipe_book/view/recipe_list/recipe_card_image.dart';
 import 'package:recipe_book/widgets/buttons/delete_button.dart';
+import 'package:recipe_book/widgets/images/rounded_image.dart';
 import 'package:recipe_book/widgets/labels/icon_label.dart';
 import 'package:recipe_book/widgets/labels/title_label.dart';
 
@@ -18,12 +18,13 @@ class RecipeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => NavigationUtils.navigateToView(
-        context,
-        RecipeDetails(
-          recipe: recipe,
-        ),
-      ),
+      onTap: () =>
+          NavigationUtils.navigateToView(
+            context,
+            RecipeDetails(
+              recipe: recipe,
+            ),
+          ),
       child: Container(
         margin: const EdgeInsets.all(5),
         height: 80,
@@ -46,33 +47,37 @@ class RecipeCard extends StatelessWidget {
   Widget _cardContent(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: RecipeCardImage(imagePath: recipe.image),
+        RoundedImage(
+          imagePath: recipe.image,
+          aspectRatio: 1,
+          borderRadius: 90,
+          height: 80,
+          width: 80,
+          boxFit: BoxFit.cover,
+          placeholderImage: Icons.menu_book,
         ),
         Expanded(
-          flex: 3,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Flexible(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      TitleLabel(title: recipe.recipeName, maxRows: 1),
-                      if (recipe.duration > 0)
-                        Padding(
-                          padding: const EdgeInsets.only(top: 8.0),
-                          child: IconLabel(
-                            icon: Icons.timer_outlined,
-                            label:
-                                "${recipe.duration} ${RecipeBookStrings.minutesString}",
-                          ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    TitleLabel(title: recipe.recipeName),
+                    if (recipe.duration > 0)
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: IconLabel(
+                          icon: Icons.timer_outlined,
+                          label:
+                          "${recipe.duration} ${RecipeBookStrings
+                              .minutesString}",
                         ),
-                    ],
-                  ),
+                      ),
+                  ],
                 ),
                 DeleteButton(
                   itemToDeleteName: recipe.recipeName,

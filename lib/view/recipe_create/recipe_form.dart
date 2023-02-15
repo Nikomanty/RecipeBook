@@ -7,7 +7,7 @@ import 'package:recipe_book/cubit/recipe_cubit.dart';
 import 'package:recipe_book/model/recipe.dart';
 import 'package:recipe_book/view/recipe_create/components/ingredients_input_field.dart';
 import 'package:recipe_book/view/recipe_create/components/introduction_input_field.dart';
-import 'package:recipe_book/widgets/containers/labeled_outline_box.dart';
+import 'package:recipe_book/widgets/containers/titled_outline_box.dart';
 import 'package:recipe_book/widgets/images/rounded_image.dart';
 
 class RecipeForm extends StatefulWidget {
@@ -31,76 +31,58 @@ class _RecipeFormState extends State<RecipeForm> {
       appBar: AppBar(),
       body: Form(
         key: _formKey,
-        child: getNewRecipeForm(),
+        child: ListView(
+          padding: const EdgeInsets.all(10),
+          children: [
+            TitledOutlineBox(
+              label: RecipeBookStrings.recipeImageString,
+              content: InkWell(
+                child: RoundedImage(
+                  imagePath: _imagePath,
+                  height: 300,
+                  placeholderImage: Icons.add_a_photo_outlined,
+                ),
+                onTap: () => _pickImage(),
+              ),
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+            TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return RecipeBookStrings.mustAddRecipeName;
+                }
+                return null;
+              },
+              onChanged: (value) {
+                _recipeName = value.trim();
+              },
+              keyboardType: TextInputType.text,
+              decoration: const InputDecoration(
+                  hintText: RecipeBookStrings.addRecipeNameHint),
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+            TextFormField(
+              onChanged: (value) {
+                _duration = int.parse(value);
+              },
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                  hintText: RecipeBookStrings.durationSelectorHint),
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
+            IngredientInputField(
+              ingredients: _ingredients,
+            ),
+            IntroductionInputField(
+              introductions: _introductions,
+            ),
+            _createCreateRecipeButton(context),
+          ],
+        )
       ),
     );
   }
 
-  ListView getNewRecipeForm() {
-    return ListView(
-      padding: const EdgeInsets.all(10),
-      children: [
-        LabeledOutlineBox(
-          label: RecipeBookStrings.recipeImageString,
-          child: InkWell(
-            child: _recipePicker(),
-            onTap: () => _pickImage(),
-          ),
-        ),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        TextFormField(
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return RecipeBookStrings.mustAddRecipeName;
-            }
-            return null;
-          },
-          onChanged: (value) {
-            _recipeName = value.trim();
-          },
-          keyboardType: TextInputType.text,
-          decoration: const InputDecoration(
-              hintText: RecipeBookStrings.addRecipeNameHint),
-        ),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        TextFormField(
-          onChanged: (value) {
-            _duration = int.parse(value);
-          },
-          keyboardType: TextInputType.number,
-          decoration: const InputDecoration(
-              hintText: RecipeBookStrings.durationSelectorHint),
-        ),
-        const Padding(padding: EdgeInsets.symmetric(vertical: 5)),
-        IngredientInputField(
-          ingredients: _ingredients,
-        ),
-        IntroductionInputField(
-          introductions: _introductions,
-        ),
-        _createCreateRecipeButton(context),
-      ],
-    );
-  }
-
-  Widget _recipePicker() {
-    if (_imagePath.isNotEmpty) {
-      return RoundedImage(
-        imagePath: _imagePath,
-        height: 300,
-        aspectRatio: 4 / 3,
-      );
-    } else {
-      return const SizedBox(
-        height: 300,
-        child: Center(
-            child: Text(
-          RecipeBookStrings.clickToAddImage,
-          textAlign: TextAlign.center,
-        )),
-      );
-    }
-  }
 
   Widget _createCreateRecipeButton(BuildContext context) {
     return TextButton(
@@ -113,7 +95,7 @@ class _RecipeFormState extends State<RecipeForm> {
         ),
       ),
       onPressed: () {
-        _trySubmit();
+        _submitRecipeForm();
       },
     );
   }
@@ -133,21 +115,17 @@ class _RecipeFormState extends State<RecipeForm> {
     }
   }
 
-  void _trySubmit() {
+  void _submitRecipeForm() {
     final isValid = _formKey.currentState?.validate();
     if (isValid! && isValid) {
-      _submitRecipeForm();
+      context.read<RecipeCubit>().createRecipe(Recipe(
+        recipeName: _recipeName,
+        duration: _duration,
+        ingredients: _ingredients,
+        introductions: _introductions,
+        image: _imagePath,
+      ));
+      Navigator.pop(context);
     }
-  }
-
-  void _submitRecipeForm() {
-    context.read<RecipeCubit>().createRecipe(Recipe(
-          recipeName: _recipeName,
-          duration: _duration,
-          ingredients: _ingredients,
-          introductions: _introductions,
-          image: _imagePath,
-        ));
-    Navigator.pop(context);
   }
 }

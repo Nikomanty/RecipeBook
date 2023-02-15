@@ -40,7 +40,7 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
         int index = widget.introductions.indexOf(item);
         return Row(
           children: [
-            _introductionInputField(index),
+            Expanded(child: _introductionInputField(index)),
             Padding(
               padding: const EdgeInsets.only(left: 10.0),
               child: RemoveItemButton(removeItem: () {
@@ -56,16 +56,14 @@ class _IntroductionInputFieldState extends State<IntroductionInputField> {
   }
 
   Widget _introductionInputField(int index) {
-    return Expanded(
-      child: TextFormField(
-        onChanged: (value) {
-          widget.introductions[index] = value;
-        },
-        keyboardType: TextInputType.multiline,
-        maxLines: null,
-        decoration: const InputDecoration(
-            hintText: RecipeBookStrings.addIntroductionsHint),
-      ),
+    return TextFormField(
+      onChanged: (value) {
+        widget.introductions[index] = value;
+      },
+      keyboardType: TextInputType.multiline,
+      maxLines: null,
+      decoration: const InputDecoration(
+          hintText: RecipeBookStrings.addIntroductionsHint),
     );
   }
 }
